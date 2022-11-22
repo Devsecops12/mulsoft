@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c5b5073d-724c-4517-817c-86543f11ac07" >
+		<http:listener-connection host="0.0.0.0" port="8778" />
+	</http:listener-config>
+	<flow name="mulsoftFlow" doc:id="11a9bb2d-3baa-4677-aa69-0a112a5c6cf2" >
+		<http:listener doc:name="Listener" doc:id="0b9940fe-7e0b-428a-8778-44b9b27e6041" config-ref="HTTP_Listener_config" path="/cicdtest"/>
+		<ee:transform doc:name="Transform Message" doc:id="497075fc-8f34-48ba-9039-f9be5ff65f63" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/js
+---
+{
+	Response: "Ci cd executed successfully"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="1c55310a-6291-4418-bab0-0f78a7d4fd17" message="#### CICD flow"/>
+	</flow>
+</mule>
