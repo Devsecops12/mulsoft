@@ -22,7 +22,8 @@ pipeline {
       steps {
         echo 'Deploying only because of code commit...'
         echo 'Deploying to  dev environent....'
-        sh 'mvn package deploy -DmuleDeploy -Dusername=varsha_p -Dpassword=C@yogita2809 -DworkerType=Micro -Dworkers=1 -Dregion=us-west-2'
+//        sh 'mvn package deploy -DmuleDeploy -Dusername=varsha_p -Dpassword=C@yogita2809 -DworkerType=Micro -Dworkers=1 -Dregion=us-west-2'
+	sh 'mvn clean deploy -DmuleDeploy -DskipTests -Dmule.version=4.3.0 -Danypoint.username=varsha_p -Danypoint.password=C@ygita2809 -Dappname=testcicdlakshmi-mar23 -Dbusiness=LakshmiMule -DvCore=Micro -Dworkers=1'
       }
 	  
 	}
